@@ -1,4 +1,7 @@
 ﻿using Application.Features.Brands.Commands.Create;
+using Application.Features.Brands.Queries.GetList;
+using Core.Application.Request;
+using Core.Application.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +16,20 @@ public class BrandsController : BaseController
     public async Task<IActionResult> Add([FromBody] CreateBrandCommand createBrandCommand)
     {
         CreatedBrandResponse response = await Mediator.Send(createBrandCommand);
+
+        return Ok(response);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
+    {
+        GetListBrandQuery getListBrandQuery = new GetListBrandQuery()
+        {
+            PageRequest = pageRequest
+        };
+
+        GetListResponse<GetListBrandListItemDto> response
+            = await Mediator.Send(getListBrandQuery);
 
         return Ok(response);
     }
