@@ -1,4 +1,5 @@
 ﻿using Application.Features.Brands.Commands.Create;
+using Application.Features.Brands.Queries.GetById;
 using Application.Features.Brands.Queries.GetList;
 using Core.Application.Request;
 using Core.Application.Responses;
@@ -30,6 +31,20 @@ public class BrandsController : BaseController
 
         GetListResponse<GetListBrandListItemDto> response
             = await Mediator.Send(getListBrandQuery);
+
+        return Ok(response);
+    }
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetById([FromRoute] Guid id)
+    {
+        GetByIdBrandQuery getByIdBrandQuery = new GetByIdBrandQuery()
+        {
+            Id = id
+        };
+
+        GetByIdBrandResponse response
+            = await Mediator.Send(getByIdBrandQuery);
 
         return Ok(response);
     }
