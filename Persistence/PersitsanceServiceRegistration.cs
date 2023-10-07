@@ -17,7 +17,9 @@ public static class PersitsanceServiceRegistration
     public static IServiceCollection AddPersistanceServices
         (this IServiceCollection services,IConfiguration configuration)
     {
-        services.AddDbContext<BaseDbContext>(options => options.UseInMemoryDatabase("Test"));
+        //services.AddDbContext<BaseDbContext>(options => options.UseInMemoryDatabase("Test"));
+
+        services.AddDbContext<BaseDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("RentACar")));
         services.AddScoped<IBrandRepository,BrandRepository>();
         
         return services;
