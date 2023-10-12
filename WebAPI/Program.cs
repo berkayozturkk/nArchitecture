@@ -22,7 +22,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.ConfigureCostumExceptionMiddleware();
+if(app.Environment.IsProduction())
+    app.ConfigureCostumExceptionMiddleware();
 
 app.UseHttpsRedirection();
 
