@@ -2,6 +2,7 @@
 using Application.Services.Repositories;
 using AutoMapper;
 using Core.Application.Pipelines.Caching;
+using Core.Application.Pipelines.Logging;
 using Core.Application.Request;
 using Core.Application.Responses;
 using Core.Persistence.Paging;
@@ -18,7 +19,8 @@ namespace Application.Features.Brands.Queries.GetList;
 
 public class GetListBrandQuery :
     IRequest<GetListResponse<GetListBrandListItemDto>>,
-    ICachableRequest
+    ICachableRequest,
+    ILoggableRequest
 {
     public PageRequest PageRequest { get; set; }
 
