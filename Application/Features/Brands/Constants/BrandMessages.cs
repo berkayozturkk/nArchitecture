@@ -10,3 +10,8 @@ public class BrandMessages
 {
     public const string BrandNameExits = "Brand name exists";
 }
+
+public class BrandCachingKeys
+{
+    public const string BrandCachingGroupKey = "GetBrands";
+}
